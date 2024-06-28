@@ -21,8 +21,6 @@ prompt_template = ChatPromptTemplate.from_messages(
     ]
 )
 
-result = temlate.invoke(
-    {"language": "日本語"}
-)
+result = temlate.invoke({"language": "日本語"})
 print(result)
 # => messages=[SystemMessage(content='与えた単語を日本語に変換してください'), HumanMessage(content='Hello')]

@@ -4,9 +4,7 @@ from langchain_core.prompts import (
 )
 from langchain.chains import LLMChain
 
-model = ChatOpenAI(
-    model="gpt-3.5-turbo"
-)
+model = ChatOpenAI(model="gpt-3.5-turbo")
 prompt = ChatPromptTemplate.from_messages(
     [
         (
@@ -17,9 +15,7 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-chain = LLMChain(
-    llm=model, prompt=prompt
-)
+chain = LLMChain(llm=model, prompt=prompt)
 result = chain.run(
     {
         "language": "日本語",

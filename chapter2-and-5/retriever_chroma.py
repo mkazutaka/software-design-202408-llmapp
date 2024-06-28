@@ -6,9 +6,7 @@ from langchain_openai import (
     OpenAIEmbeddings,
 )
 
-embeddings_model = OpenAIEmbeddings(
-    model="text-embedding-3-small"
-)
+embeddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
 
 documents = [
     Document(
@@ -35,8 +33,6 @@ retriver = db.as_retriever(
     search_type="similarity",
     search_kwargs={"k": 1},
 )
-result_documents = retriver.invoke(
-    "今日の晩ごはん"
-)
+result_documents = retriver.invoke("今日の晩ごはん")
 print(result_documents[0])
 # => page_content='今日の晩ごはんは、とんかつだよ' metadata={'speaker': 'mother'}

@@ -14,9 +14,7 @@ from langchain_cohere.rerank import (
 )
 
 model = ChatOpenAI(model="gpt-4o")
-embaddings_model = OpenAIEmbeddings(
-    model="text-embedding-3-small"
-)
+embaddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
 
 
 documents = [
@@ -26,15 +24,9 @@ documents = [
     Document(
         page_content="晩ごはんには、ハンバーガー。晩ごはんには、ハンバーガー"
     ),
-    Document(
-        page_content="今日の朝ごはんハンバーガーです。"
-    ),
-    Document(
-        page_content="明日の昼ご飯は、オムライスです。"
-    ),
-    Document(
-        page_content="明日の夜ご飯は、カレーハンバーグです。"
-    ),
+    Document(page_content="今日の朝ごはんハンバーガーです。"),
+    Document(page_content="明日の昼ご飯は、オムライスです。"),
+    Document(page_content="明日の夜ご飯は、カレーハンバーグです。"),
 ]
 
 db = Chroma.from_documents(
@@ -49,17 +41,11 @@ query = "今日の夜ご飯は？"
 print(retriever.invoke(query)[0])
 # => page_content='明日の夜ご飯は、カレーハンバーグです。'
 
-compressor = CohereRerank(
-    model="rerank-multilingual-v3.0"
+compressor = CohereRerank(model="rerank-multilingual-v3.0")
+compression_retriever = ContextualCompressionRetriever(
+    base_compressor=compressor,
+    base_retriever=retriever,
 )
-compression_retriever = (
-    ContextualCompressionRetriever(
-        base_compressor=compressor,
-        base_retriever=retriever,
-    )
-)
-result = compression_retriever.invoke(
-    query
-)
+result = compression_retriever.invoke(query)
 print(result[0])
 # => page_content='今日の晩ごはんは、カレー？今日の晩ごはんは、とんかつだよ' metadata={'relevance_score': 0.9608049}

@@ -5,22 +5,12 @@ from langchain_community.utils.math import (
     cosine_similarity,
 )
 
-embeddings_model = OpenAIEmbeddings(
-    model="text-embedding-3-small"
-)
+embeddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
 
-a = embeddings_model.embed_query(
-    "Hello"
-)
-b = embeddings_model.embed_query(
-    "こんにちは"
-)
-c = embeddings_model.embed_query(
-    "こんばんは"
-)
-d = embeddings_model.embed_query(
-    "明日のご飯はカレーです！"
-)
+a = embeddings_model.embed_query("Hello")
+b = embeddings_model.embed_query("こんにちは")
+c = embeddings_model.embed_query("こんばんは")
+d = embeddings_model.embed_query("明日のご飯はカレーです！")
 
 print("次元数", len(a))
 print(

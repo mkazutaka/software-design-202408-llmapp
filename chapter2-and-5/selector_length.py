@@ -15,13 +15,11 @@ examples = [
         "answer": "0",
     },
 ]
-example_prompt = (
-    PromptTemplate.from_template(
-        """
+example_prompt = PromptTemplate.from_template(
+    """
 Text: {sentence}
 Answer: {answer}
 """.strip()
-    )
 )
 
 selector = LengthBasedExampleSelector(

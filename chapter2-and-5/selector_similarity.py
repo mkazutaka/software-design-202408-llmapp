@@ -16,9 +16,7 @@ examples = [
         "answer": "0",
     },
 ]
-embeddings_model = OpenAIEmbeddings(
-    model="text-embedding-3-small"
-)
+embeddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
 
 selector = SemanticSimilarityExampleSelector.from_examples(
     examples=examples,
@@ -26,10 +24,6 @@ selector = SemanticSimilarityExampleSelector.from_examples(
     vectorstore_cls=Chroma,
     k=1,
 )
-selected_examples = (
-    selector.select_examples(
-        {"question": "素晴らしい"}
-    )
-)
+selected_examples = selector.select_examples({"question": "素晴らしい"})
 print(selected_examples)
 # => [{'answer': '1', 'sentence': 'これは素晴らしい!'}]

@@ -11,9 +11,7 @@ from langchain_core.prompts import (
 )
 
 
-embeddings_model = OpenAIEmbeddings(
-    model="text-embedding-3-small"
-)
+embeddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
 
 documents = [
     Document(
@@ -34,8 +32,6 @@ db = Chroma.from_documents(
     documents=documents,
     embedding=embeddings_model,
 )
-result_documents = db.similarity_search(
-    query="今日の晩ごはん", k=1
-)
+result_documents = db.similarity_search(query="今日の晩ごはん", k=1)
 print(result_documents[0])
 # => page_content='今日の晩ごはんは、とんかつだよ' metadata={'speaker': 'mother'}

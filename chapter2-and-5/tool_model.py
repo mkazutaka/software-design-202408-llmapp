@@ -8,15 +8,9 @@ def weather(place: str) -> int:
     return "晴れです"
 
 
-model = ChatOpenAI(
-    model="gpt-3.5-turbo"
-)
-llm_with_tools = model.bind_tools(
-    [weather]
-)
+model = ChatOpenAI(model="gpt-3.5-turbo")
+llm_with_tools = model.bind_tools([weather])
 
-result = llm_with_tools.invoke(
-    "東京の天気を教えて"
-)
+result = llm_with_tools.invoke("東京の天気を教えて")
 print(result.tool_calls)
 # => [{'name': 'weather', 'args': {'place': 'Tokyo'}, 'id': 'call_6w9NoJr1LQFe3r4E4BZaMhrH'}]

@@ -22,11 +22,9 @@ example_prompt = ChatPromptTemplate.from_messages(
         ("ai", "{answer}"),
     ]
 )
-few_shot_prompt = (
-    FewShotChatMessagePromptTemplate(
-        example_prompt=example_prompt,
-        examples=examples,
-    )
+few_shot_prompt = FewShotChatMessagePromptTemplate(
+    example_prompt=example_prompt,
+    examples=examples,
 )
 prompt = ChatPromptTemplate.from_messages(
     [
@@ -41,13 +39,7 @@ prompt = ChatPromptTemplate.from_messages(
         ),
     ]
 )
-print(
-    prompt.invoke(
-        {
-            "input": "なんてひどいショーなんだ！"
-        }
-    ).to_messages()
-)
+print(prompt.invoke({"input": "なんてひどいショーなんだ！"}).to_messages())
 # => [SystemMessage(content='以下のTextから0か1かを判定してください。'),
 #     HumanMessage(content='Text: これはすばらしい!\nAnswer:'),
 #     AIMessage(content='1'),

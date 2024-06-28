@@ -23,15 +23,9 @@ result = prompt_template.invoke(
     {
         "language": "日本語",
         "messages": [
-            HumanMessage(
-                content="Hello"
-            ),
-            AIMessage(
-                content="こんにちは"
-            ),
-            HumanMessage(
-                content="Good Morning"
-            ),
+            HumanMessage(content="Hello"),
+            AIMessage(content="こんにちは"),
+            HumanMessage(content="Good Morning"),
         ],
         # もしくは
         # "messages": [

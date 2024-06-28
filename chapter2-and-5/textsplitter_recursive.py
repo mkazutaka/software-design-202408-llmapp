@@ -4,16 +4,12 @@ from langchain_text_splitters import (
 
 TEXT = """12345 67890abcdefghij"""
 
-text_splitter = (
-    RecursiveCharacterTextSplitter(
-        chunk_size=5,
-        chunk_overlap=2,
-        separators=[" ", ""],
-    )
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=5,
+    chunk_overlap=2,
+    separators=[" ", ""],
 )
-splitted = text_splitter.split_text(
-    TEXT
-)
+splitted = text_splitter.split_text(TEXT)
 for i in range(len(splitted)):
     print(i, splitted[i])
 

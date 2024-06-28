@@ -12,41 +12,27 @@ from langchain_core.pydantic_v1 import (
 )
 from langchain_openai import ChatOpenAI
 
-model = ChatOpenAI(
-    model="gpt-3.5-turbo"
-)
+model = ChatOpenAI(model="gpt-3.5-turbo")
 
 
 class TranslateResult(BaseModel):
-    japanese: str = Field(
-        description="日本語の結果"
-    )
-    spanish: str = Field(
-        description="スペイン語の結果"
-    )
+    japanese: str = Field(description="日本語の結果")
+    spanish: str = Field(description="スペイン語の結果")
 
 
-parser = JsonOutputParser(
-    pydantic_object=TranslateResult
-)
+parser = JsonOutputParser(pydantic_object=TranslateResult)
 
 prompt_template = ChatPromptTemplate(
     messages=[
         SystemMessagePromptTemplate.from_template(
             "与えられた言語に翻訳してください\n{format_instructions}\n{query}\n"
         ),
-        HumanMessagePromptTemplate.from_template(
-            "{query}"
-        ),
+        HumanMessagePromptTemplate.from_template("{query}"),
     ],
     input_variables=["query"],
-    partial_variables={
-        "format_instructions": parser.get_format_instructions()
-    },
+    partial_variables={"format_instructions": parser.get_format_instructions()},
 )
 
 chain = prompt_template | model | parser
-result = chain.invoke(
-    {"query", "hello"}
-)
+result = chain.invoke({"query", "hello"})
 print(result)

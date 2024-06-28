@@ -9,9 +9,7 @@ def add_one(x: int) -> int:
 
 
 runnable = RunnableLambda(add_one)
-sequence_1 = (
-    runnable | runnable | runnable
-)
+sequence_1 = runnable | runnable | runnable
 sequence_2 = RunnableSequence(
     first=runnable,
     last=runnable,

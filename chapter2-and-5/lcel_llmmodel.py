@@ -6,9 +6,7 @@ from langchain_core.output_parsers import (
     StrOutputParser,
 )
 
-model = ChatOpenAI(
-    model="gpt-3.5-turbo"
-)
+model = ChatOpenAI(model="gpt-3.5-turbo")
 parser = StrOutputParser()
 prompt = ChatPromptTemplate.from_messages(
     [

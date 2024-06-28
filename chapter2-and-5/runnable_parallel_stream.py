@@ -13,16 +13,10 @@ parser = StrOutputParser()
 model = ChatOpenAI(model="gpt-4o")
 
 japanese_chain = (
-    ChatPromptTemplate.from_template(
-        "日本語に翻訳: {query}"
-    )
-    | model
-    | parser
+    ChatPromptTemplate.from_template("日本語に翻訳: {query}") | model | parser
 )
 spanish_chain = (
-    ChatPromptTemplate.from_template(
-        "スペイン語に翻訳: {query}"
-    )
+    ChatPromptTemplate.from_template("スペイン語に翻訳: {query}")
     | model
     | parser
 )
@@ -31,19 +25,10 @@ runnable = RunnableParallel(
     spanish=spanish_chain,
 )
 
-output = {
-    key: ""
-    for key, _ in runnable.output_schema()
-}
-for chunk in runnable.stream(
-    {
-        "query": "It's a beautiful day today."
-    }
-):
+output = {key: "" for key, _ in runnable.output_schema()}
+for chunk in runnable.stream({"query": "It's a beautiful day today."}):
     for key in chunk:
-        output[key] = (
-            output[key] + chunk[key]
-        )
+        output[key] = output[key] + chunk[key]
         print(output)
 # => {'japanese': '', 'spanish': ''}
 # => {'japanese': '今日は', 'spanish': 'Hoy'}

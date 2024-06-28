@@ -13,12 +13,9 @@ sequence_1 = runnable | {
     "two": runnable,
     "three": runnable | runnable,
 }
-sequence_2 = (
-    runnable
-    | RunnableParallel(
-        two=runnable,
-        three=runnable | runnable,
-    )
+sequence_2 = runnable | RunnableParallel(
+    two=runnable,
+    three=runnable | runnable,
 )
 
 print(sequence_1.invoke(0))

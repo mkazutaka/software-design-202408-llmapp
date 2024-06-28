@@ -15,17 +15,13 @@ examples = [
         "answer": "0",
     },
 ]
-example_prompt = (
-    PromptTemplate.from_template(
-        """
+example_prompt = PromptTemplate.from_template(
+    """
 Text: {sentence}
 Answer: {answer}
 """.strip()
-    )
 )
-print(
-    example_prompt.invoke(examples[0])
-)
+print(example_prompt.invoke(examples[0]))
 # => text='Text: これは素晴らしい!\nAnswer: 1'
 
 prefix = "以下のTextから0か1かを判定してください"
@@ -38,13 +34,7 @@ prompt = FewShotPromptTemplate(
     input_variables=["input"],
     example_separator="\n",
 )
-print(
-    prompt.invoke(
-        {
-            "input": "なんてひどいショーだ！"
-        }
-    ).text
-)
+print(prompt.invoke({"input": "なんてひどいショーだ！"}).text)
 # => 以下のTextから0か1かを判定してください。回答のみを答えてください。
 # => Text: これは素晴らしい!
 # => Answer: 1
