@@ -12,7 +12,7 @@ from langchain_core.pydantic_v1 import (
 )
 from langchain_openai import ChatOpenAI
 
-model = ChatOpenAI(model="gpt-3.5-turbo")
+model = ChatOpenAI(model="gpt-4o")
 
 
 class TranslateResult(BaseModel):
@@ -25,7 +25,7 @@ parser = JsonOutputParser(pydantic_object=TranslateResult)
 prompt_template = ChatPromptTemplate(
     messages=[
         SystemMessagePromptTemplate.from_template(
-            "与えられた言語に翻訳してください\n{format_instructions}\n{query}\n"
+            "与えられた言語に翻訳してください\n{format_instructions}"
         ),
         HumanMessagePromptTemplate.from_template("{query}"),
     ],
